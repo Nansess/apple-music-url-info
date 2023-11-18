@@ -1,0 +1,16 @@
+{
+  "name": "artwork-resolver-apple-music",
+  "version": "1.0.0",
+  "description": "A package for resolving artwork URLs from Apple Music links",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["apple music", "artwork", "resolver"],
+  "author": "Nansess",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "cheerio": "^1.0.0-rc.12"
+  }
+}
