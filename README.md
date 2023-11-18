@@ -11,7 +11,6 @@ You can install this package using npm. Make sure you have Node.js installed.
 ## Usage
 
 ```const { getArtworkUrl } = require('apple-music-artwork');
-
 const appleMusicLink = 'https://music.apple.com/us/album/example-album/1234567890';
 getArtworkUrl(appleMusicLink)
   .then(artworkUrl => {
