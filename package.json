@@ -1,5 +1,5 @@
 {
-  "name": "artwork-resolver-apple-music",
+  "name": "apple-music-artwork",
   "version": "1.0.0",
   "description": "A package for resolving artwork URLs from Apple Music links",
   "main": "index.js",
