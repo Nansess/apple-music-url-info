@@ -8,6 +8,7 @@ You can install this package using npm. Make sure you have Node.js installed.
 
 ```bash
 npm install github:Nansess/apple-music-artwork
+```
 
 ## Usage
 
