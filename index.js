@@ -1,23 +1,55 @@
 const axios = require('axios');
-const { parse } = require('himalaya');
+const cheerio = require('cheerio');
 
-async function getArtworkUrl(appleMusicLink) {
+async function getArtwork(appleMusicLink) {
   try {
     const { data } = await axios.get(appleMusicLink);
-    const json = parse(data);
 
-    console.log('Parsed JSON:', JSON.stringify(json, null, 2));
+    const $ = cheerio.load(data);
 
-    const artworkUrl = json.find(tag => tag.type === 'element' && tag.tagName === 'meta' && tag.attributes.some(attr => attr.key === 'name' && attr.value === 'twitter:image'));
+    const artworkUrl = $('meta[name="twitter:image"]').attr('content');
+    if (!artworkUrl) {
+      throw new Error('Artwork URL not found in the page source.');
+    }
 
-    if (!artworkUrl) throw new Error('Artwork URL not found in the parsed JSON.');
-
-    // Note: The rest of your code to manipulate the artwork URL as needed
-
-    return artworkUrl;
+    return artworkUrl.replace('/600x600bf-60.jpg', '/1000x1000bf-60.jpg');
   } catch (error) {
-    throw new Error(`Error: ${error.message}`);
+    throw new Error(`Failed to fetch artwork from Apple Music link. ${error.message}`);
   }
 }
 
-module.exports = getArtworkUrl;
+async function getMetaData(appleMusicLink) {
+  try {
+    const { data } = await axios.get(appleMusicLink);
+
+    const $ = cheerio.load(data);
+
+    const title = $('meta[property="og:title"]').attr('content');
+    const description = $('meta[property="og:description"]').attr('content');
+    const siteName = $('meta[property="og:site_name"]').attr('content');
+    const url = $('meta[property="og:url"]').attr('content');
+    const imageAlt = $('meta[property="og:image:alt"]').attr('content');
+    const type = $('meta[property="og:type"]').attr('content');
+    const locale = $('meta[property="og:locale"]').attr('content');
+
+    const durationMatch = description.match(/Duration: (\d+:\d+)/);
+    const duration = durationMatch ? durationMatch[1] : '';
+
+    return {
+      title,
+      description: `Listen to ${title} by ${siteName} on Apple Music. ${description.replace(`. Duration: ${duration}`, '')}`,
+      url,
+      imageAlt,
+      type,
+      locale,
+      duration,
+    };
+  } catch (error) {
+    throw new Error(`Failed to fetch metadata from Apple Music link. ${error.message}`);
+  }
+}
+
+module.exports = {
+  getArtwork,
+  getMetaData,
+};
