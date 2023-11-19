@@ -9,10 +9,10 @@ You can install this package using npm. Make sure you have Node.js installed.
 ```npm install github:Nansess/apple-music-url-info```
 
 ## Usage
+
+## Example 1: Fetch Artwork URL
 ```
 const { getArtwork, getMetaData } = require('apple-music-url-info');
-
-// Example 1: Fetch Artwork URL
 const exampleArtworkLink = 'https://music.apple.com/us/album/good-kid-m-a-a-d-city-deluxe-version/1440818890';
 getArtwork(exampleArtworkLink)
   .then(artworkUrl => {
@@ -21,8 +21,10 @@ getArtwork(exampleArtworkLink)
   .catch(error => {
     console.error('Example 1 - Error:', error.message);
   });
+```
 
-// Example 2: Fetch Metadata
+## Example 2: Fetch Metadata
+```
 const exampleMetadataLink = 'https://music.apple.com/us/album/good-kid-m-a-a-d-city-deluxe-version/1440818890';
 getMetaData(exampleMetadataLink)
   .then(metaData => {
