@@ -1,20 +1,20 @@
-const { parse } = require('himalaya');
 const axios = require('axios');
+const { parse } = require('himalaya');
 
 async function getArtworkUrl(appleMusicLink) {
   try {
-    const response = await axios.get(appleMusicLink);
-    const parsedHtml = parse(response.data);
+    const { data } = await axios.get(appleMusicLink);
+    const json = parse(data);
 
-    const metaTag = parsedHtml.find(tag => tag.type === 'element' && tag.tagName === 'meta' && tag.attributes.some(attr => attr.key === 'name' && attr.value === 'twitter:image'));
+    console.log('Parsed JSON:', JSON.stringify(json, null, 2));
 
-    if (!metaTag) {
-      throw new Error('Artwork URL not found in the page source.');
-    }
+    const artworkUrl = json.find(tag => tag.type === 'element' && tag.tagName === 'meta' && tag.attributes.some(attr => attr.key === 'name' && attr.value === 'twitter:image'));
 
-    const artworkUrl = metaTag.attributes.find(attr => attr.key === 'content').value;
+    if (!artworkUrl) throw new Error('Artwork URL not found in the parsed JSON.');
 
-    return artworkUrl.replace('/600x600bf-60.jpg', '/1000x1000bf-60.jpg');
+    // Note: The rest of your code to manipulate the artwork URL as needed
+
+    return artworkUrl;
   } catch (error) {
     throw new Error(`Error: ${error.message}`);
   }
