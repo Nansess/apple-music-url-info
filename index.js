@@ -1,11 +1,10 @@
 const { parse } = require('himalaya');
-const fetch = require('node-fetch');
+const axios = require('axios');
 
 async function getArtworkUrl(appleMusicLink) {
   try {
-    const response = await fetch(appleMusicLink);
-    const html = await response.text();
-    const parsedHtml = parse(html);
+    const response = await axios.get(appleMusicLink);
+    const parsedHtml = parse(response.data);
 
     const metaTag = parsedHtml.find(tag => tag.type === 'element' && tag.tagName === 'meta' && tag.attributes.some(attr => attr.key === 'name' && attr.value === 'twitter:image'));
 
