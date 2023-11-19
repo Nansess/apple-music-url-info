@@ -34,7 +34,9 @@ getMetaData(exampleMetadataLink)
     console.error('Example 2 - Error:', error.message);
   });
 ```
-##Output Examples
+## Output Examples
+
+
 ## Metadata
 ```
 Metadata: {
