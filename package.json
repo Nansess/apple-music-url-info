@@ -1,7 +1,7 @@
 {
-  "name": "apple-music-artwork",
+  "name": "apple-music-url-info",
   "version": "1.0.0",
-  "description": "A package for resolving artwork URLs from Apple Music links",
+  "description": "A package for resolving URLs from Apple Music links",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
