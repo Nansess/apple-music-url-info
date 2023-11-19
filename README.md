@@ -1,16 +1,16 @@
-# Apple Music Artwork Resolver
+# apple-music-url-info
 
-Resolve Apple Music links to obtain artwork URLs for use in Discord bots or other applications.
+Resolve Apple Music links to obtain info for use in Discord bots or other applications.
 
 ## Installation
 
 You can install this package using npm. Make sure you have Node.js installed.
 
-```npm install github:Nansess/apple-music-artwork```
+```npm install github:Nansess/apple-music-url-info```
 
 ## Usage
 ```
-const getArtworkUrl = require('apple-music-artwork');
+const getArtworkUrl = require('apple-music-url-info');
 
 const appleMusicLink = 'https://music.apple.com/us/album/example-album/1234567890';
 getArtworkUrl(appleMusicLink)
