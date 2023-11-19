@@ -10,15 +10,26 @@ You can install this package using npm. Make sure you have Node.js installed.
 
 ## Usage
 ```
-const getArtworkUrl = require('apple-music-url-info');
+const { getArtwork, getMetaData } = require('apple-music-url-info');
 
-const appleMusicLink = 'https://music.apple.com/us/album/example-album/1234567890';
-getArtworkUrl(appleMusicLink)
+// Example 1: Fetch Artwork URL
+const exampleArtworkLink = 'https://music.apple.com/us/album/good-kid-m-a-a-d-city-deluxe-version/1440818890';
+getArtwork(exampleArtworkLink)
   .then(artworkUrl => {
-    console.log('Artwork URL:', artworkUrl);
+    console.log('Example 1 - Artwork URL:', artworkUrl);
   })
   .catch(error => {
-    console.error('Error:', error);
+    console.error('Example 1 - Error:', error.message);
+  });
+
+// Example 2: Fetch Metadata
+const exampleMetadataLink = 'https://music.apple.com/us/album/good-kid-m-a-a-d-city-deluxe-version/1440818890';
+getMetaData(exampleMetadataLink)
+  .then(metaData => {
+    console.log('Example 2 - Metadata:', metaData);
+  })
+  .catch(error => {
+    console.error('Example 2 - Error:', error.message);
   });
 ```
 ## Dependencies
