@@ -35,6 +35,9 @@ async function getMetaData(appleMusicLink) {
     const durationMatch = description.match(/Duration: (\d+:\d+)/);
     const duration = durationMatch ? durationMatch[1] : '';
 
+    const songsMatch = description.match(/Playlist · (\d+) Songs/);
+    const numberOfSongs = songsMatch ? parseInt(songsMatch[1]) : 0;
+
     return {
       title,
       description: `Listen to ${title} by ${siteName} on Apple Music. ${description.replace(`. Duration: ${duration}`, '')}`,
@@ -43,6 +46,7 @@ async function getMetaData(appleMusicLink) {
       type,
       locale,
       duration,
+      numberOfSongs, 
     };
   } catch (error) {
     throw new Error(`Failed to fetch metadata from Apple Music link. ${error.message}`);
